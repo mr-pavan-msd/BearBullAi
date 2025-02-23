@@ -1,6 +1,7 @@
 import streamlit as st
 import time
 import speech_recognition as sr
+from nsepython import nsefetch, nse_eq
 
 # Set page config
 st.set_page_config(page_title="Bear Bull AI - Chat", layout="wide")
@@ -114,6 +115,25 @@ if st.session_state["messages"] and st.session_state["messages"][-1][0] == "user
     bot_response = "Hello! How can I assist you in stock trading today?"
     st.session_state["messages"].append(("bot", bot_response))
     st.rerun()
+
+# Function to fetch Indian stock data
+def get_indian_stock_data(symbol):
+    try:
+        data = nse_eq(symbol)
+        return data
+    except Exception as e:
+        return f"Error fetching data for {symbol}: {e}"
+
+# Search symbol and fetch real-time data for Indian stocks
+st.sidebar.title("Search Indian Stock Symbol")
+symbol = st.sidebar.text_input("Enter Indian stock symbol (e.g., TCS, INFY):")
+if symbol:
+    stock_data = get_indian_stock_data(symbol)
+    if isinstance(stock_data, dict):
+        st.sidebar.write(f"Data for {symbol}:")
+        st.sidebar.write(stock_data)
+    else:
+        st.sidebar.error(stock_data)
 
 # Bottom navigation bar
 st.markdown(
