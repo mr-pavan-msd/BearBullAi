@@ -7,52 +7,84 @@ st.set_page_config(page_title="Bear Bull AI", layout="wide")
 st.markdown(
     """
     <style>
-        body {
-            background-color: black;
-        }
-        .header {
-            font-size: 30px;
-            font-weight: bold;
-            font-style: italic;
-            color: white;
-            text-align: center;
-        }
-        .holdings-section {
-            background-color: #E0E0E0;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 10px;
-        }
-        .card {
-            background-color: #4285F4;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: bold;
-            color: white;
-            font-size: 18px;
-        }
-        .nav-bar {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #E0E0E0;
-            text-align: center;
-            padding: 10px;
-            display: flex;
-            justify-content: space-around;
-        }
-        .nav-button {
-            color: white;
-            background-color: #FF5733;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 50%;
-            font-size: 14px;
-            font-weight: bold;
-            text-decoration: none;
-        }
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * { font-family: 'Poppins', sans-serif; }
+
+    /* Fade-in animation for components */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .stButton > button, .stTextInput > div > div > input, .stDataFrame, .stPlotlyChart, .stMetric, .stInfo {
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    /* Gradient background for the header */
+    .header {
+        text-align: center;
+        background: linear-gradient(90deg, #FF416C, #FF4B2B);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 3.5rem;
+        margin: 0 auto; /* Center the header */
+        font-weight: 600;
+    }
+
+    /* Styling for holdings section */
+    .holdings-section {
+        background: linear-gradient(135deg, #f0f2f6, #e0e0e0);
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styling for cards */
+    .card {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        padding: 15px;
+        border-radius: 10px;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+        font-size: 18px;
+        transition: all 0.3s ease;
+    }
+    .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Styling for the bottom navigation bar */
+    .nav-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #333;
+        padding: 10px;
+        text-align: center;
+        z-index: 100;
+        display: flex;
+        justify-content: space-around;
+    }
+    .nav-button {
+        color: white;
+        background: linear-gradient(135deg, #FF416C, #FF4B2B);
+        border: none;
+        padding: 10px 15px;
+        cursor: pointer;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: bold;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    .nav-button:hover {
+        background: linear-gradient(135deg, #FF4B2B, #FF416C);
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
     </style>
     """,
     unsafe_allow_html=True
