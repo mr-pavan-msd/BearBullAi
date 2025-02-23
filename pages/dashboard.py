@@ -313,23 +313,30 @@ with col2:
     for stock, details in losers.items():
         st.metric(label=stock, value=f"₹{details[0]}", delta=details[1])
 
-# Bottom Navigation Bar
-st.markdown(
-    """
-    <div class='nav-container'>
-        <button class='nav-button' onclick="window.location.href='/Home'">🏠 Home</button>
-        <button class='nav-button' onclick="window.location.href='/Dashboard'">📊 Dashboard</button>
-        <button class='nav-button' onclick="window.location.href='/Alerts'">🔔 Stock Alerts</button>
-        <button class='nav-button' onclick="window.location.href='/AI_Chat'">🤖 AI Chat</button>
-        <button class='nav-button' onclick="window.location.href='/Portfolio'">💼 Portfolio</button>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+# Multi-Stock Watchlist
+st.markdown("### 📌 Multi-Stock Watchlist")
+watchlist = ["TCS.NS", "INFY.NS", "HDFCBANK.NS", "ICICIBANK.NS"]
+cols = st.columns(len(watchlist))
+for i, stock in enumerate(watchlist):
+    with cols[i]:
+        if st.button(stock, key=f"watchlist_{stock}"):
+            stock_symbol = stock
 
-# Footer
-st.markdown("""
-    <div class="footer">
-        © 2023 Bear Bull AI. All rights reserved.
-    </div>
-""", unsafe_allow_html=True)
+# Fixed Bottom Navigation
+st.markdown("---")
+col1, col2, col3, col4, col5 = st.columns(5)
+with col1:
+    if st.button("🏠 Home", key="nav_home"):
+        st.switch_page("Home")
+with col2:
+    if st.button("📊 Dashboard", key="nav_dashboard"):
+        st.switch_page("Dashboard")
+with col3:
+    if st.button("🔔 Stock Alerts", key="nav_alerts"):
+        st.switch_page("Alerts")
+with col4:
+    if st.button("🤖 AI Chat", key="nav_chat"):
+        st.switch_page("AI Chat")
+with col5:
+    if st.button("💼 Portfolio", key="nav_portfolio"):
+        st.switch_page("Portfolio")
