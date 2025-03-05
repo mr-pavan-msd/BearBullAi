@@ -1,0 +1,24 @@
+services:
+  - name: BearBull API
+    type: web
+    runtime: python
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: DB_URI
+        value: postgresql://username:password@your-db-url
+      - key: PORT
+        value: 10000
+    autoDeploy: true
+    pullRequestPreviewsEnabled: true
+
+  - name: BearBull UI
+    type: web
+    runtime: python
+    buildCommand: pip install -r frontend/requirements.txt
+    startCommand: streamlit run Home.py
+    envVars:
+      - key: API_URL
+        value: https://bearbullai-api.onrender.com
+    autoDeploy: true
+    pullRequestPreviewsEnabled: true
